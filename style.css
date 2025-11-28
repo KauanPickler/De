@@ -1,0 +1,341 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff8a80 25%, #ff6090 50%, #f48fb1 75%, #ff6b9d 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Corações caindo */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.falling-heart {
+    position: absolute;
+    top: -50px;
+    animation: fall linear forwards;
+    font-size: 24px;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Container principal */
+.main-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Card principal */
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 0 40px rgba(255, 107, 157, 0.3);
+    backdrop-filter: blur(10px);
+    animation: floatCard 3s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.heart-icon {
+    font-size: 80px;
+    animation: heartbeat 1.2s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+}
+
+h1 {
+    color: #e91e63;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.2);
+}
+
+.message {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+/* Caixa da pergunta */
+.question-box {
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe0e6 100%);
+    border-radius: 20px;
+    padding: 25px 20px;
+    margin-top: 20px;
+}
+
+.question-box h2 {
+    color: #d81b60;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Botões */
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 60px;
+    align-items: center;
+    position: relative;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #e91e63 0%, #f48fb1 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+}
+
+.btn-yes:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(233, 30, 99, 0.5);
+}
+
+.btn-yes:active {
+    transform: scale(1.05);
+}
+
+.btn-no {
+    background: linear-gradient(135deg, #9e9e9e 0%, #bdbdbd 100%);
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.btn-no:hover {
+    transform: scale(0.95);
+}
+
+/* Overlay de sucesso */
+.success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c2185b 100%);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease;
+}
+
+.success-overlay.show {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.success-content {
+    text-align: center;
+    color: white;
+    padding: 30px;
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.success-content .big-heart {
+    font-size: 120px;
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+.success-content h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin: 20px 0;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.success-content p {
+    font-size: 1.3rem;
+    opacity: 0.95;
+}
+
+.heart-explosion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.explosion-heart {
+    position: absolute;
+    font-size: 30px;
+    animation: explode 2s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2) translateY(-200px);
+        opacity: 0;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 30px 20px;
+        border-radius: 25px;
+    }
+
+    .heart-icon {
+        font-size: 60px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .message {
+        font-size: 1rem;
+    }
+
+    .question-box h2 {
+        font-size: 1.3rem;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .success-content .big-heart {
+        font-size: 80px;
+    }
+
+    .success-content h1 {
+        font-size: 2rem;
+    }
+
+    .success-content p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+/* Efeito de brilho */
+.card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6b9d, #ff8a80, #ff6090, #f48fb1, #ff6b9d);
+    background-size: 400%;
+    border-radius: 32px;
+    z-index: -1;
+    animation: glowing 3s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+.card {
+    position: relative;
+}
