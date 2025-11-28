@@ -25,12 +25,39 @@
         </div>
     </div>
 
+    <!-- Overlay dos Minijogos -->
+    <div class="games-overlay" id="gamesOverlay">
+        <div class="games-container">
+            <div class="games-header">
+                <h2>Prove seu amor! 💕</h2>
+                <div class="score-display">
+                    <span>Vitórias: <strong id="winsCount">0</strong>/8</span>
+                    <span>Jogo: <strong id="currentGame">1</strong>/12</span>
+                </div>
+            </div>
+            <div class="game-area" id="gameArea">
+                <!-- Jogos serão renderizados aqui -->
+            </div>
+        </div>
+    </div>
+
     <div class="success-overlay" id="successOverlay">
         <div class="success-content">
             <div class="big-heart">💕</div>
             <h1>Eu sabia! 🥰</h1>
             <p>Você me fez a pessoa mais feliz do mundo!</p>
             <div class="heart-explosion" id="heartExplosion"></div>
+        </div>
+    </div>
+
+    <!-- Overlay de Falha -->
+    <div class="fail-overlay" id="failOverlay">
+        <div class="fail-content">
+            <div class="sad-emoji">💔</div>
+            <h1>Que pena...</h1>
+            <p>Você não conseguiu provar seu amor desta vez.</p>
+            <p class="final-score">Vitórias: <span id="finalWins">0</span>/12</p>
+            <button class="btn btn-retry" id="btnRetry">Tentar Novamente 🔄</button>
         </div>
     </div>
 
