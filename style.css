@@ -577,6 +577,26 @@ h1 {
     border-color: #e91e63;
 }
 
+.btn-confirm-math {
+    background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-confirm-math:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
 /* ============ JOGO 4: DIGITAÇÃO ============ */
 .typing-word {
     font-size: 1.8rem;

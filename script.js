@@ -447,6 +447,7 @@ function showMathProblem() {
         <p style="color:#666;margin-bottom:10px;">Problema ${mathCorrect + 1}/${mathTotal}</p>
         <div class="math-problem">${a} ${opDisplay} ${b} = ?</div>
         <input type="number" class="math-input" id="mathInput" autofocus onkeypress="checkMathAnswer(event)">
+        <button class="btn-confirm-math" onclick="submitMathAnswer()">Confirmar</button>
     `;
 
     document.getElementById('mathInput').focus();
@@ -465,14 +466,20 @@ function showMathProblem() {
 
 function checkMathAnswer(e) {
     if (e.key === 'Enter') {
-        const input = document.getElementById('mathInput');
-        if (parseInt(input.value) === mathAnswer) {
-            mathCorrect++;
-            showMathProblem();
-        } else {
-            clearInterval(mathTimer);
-            endGame(false);
-        }
+        submitMathAnswer();
+    }
+}
+
+function submitMathAnswer() {
+    const input = document.getElementById('mathInput');
+    if (input.value === '') return;
+
+    if (parseInt(input.value) === mathAnswer) {
+        mathCorrect++;
+        showMathProblem();
+    } else {
+        clearInterval(mathTimer);
+        endGame(false);
     }
 }
 
@@ -816,16 +823,15 @@ function startMazeGame() {
     mazeGoalPos = { x: 255, y: 255 };
     mazeTimeLeft = 25;
 
-    // Criar paredes
+    // Criar paredes - labirinto com caminho válido
     mazeWalls = [
-        { x: 80, y: 0, w: 15, h: 180 },
-        { x: 0, y: 80, w: 60, h: 15 },
-        { x: 140, y: 60, w: 15, h: 180 },
-        { x: 140, y: 60, w: 100, h: 15 },
-        { x: 200, y: 120, w: 15, h: 120 },
-        { x: 80, y: 200, w: 100, h: 15 },
-        { x: 0, y: 160, w: 60, h: 15 },
-        { x: 240, y: 180, w: 60, h: 15 }
+        { x: 60, y: 0, w: 15, h: 100 },
+        { x: 120, y: 50, w: 15, h: 120 },
+        { x: 0, y: 140, w: 80, h: 15 },
+        { x: 180, y: 0, w: 15, h: 80 },
+        { x: 180, y: 120, w: 15, h: 100 },
+        { x: 60, y: 200, w: 100, h: 15 },
+        { x: 240, y: 80, w: 15, h: 140 }
     ];
 
     renderMaze();
