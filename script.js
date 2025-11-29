@@ -1116,6 +1116,9 @@ let timingMarkerPos = 0;
 let timingDirection = 1;
 let timingInterval = null;
 let timingSpeed = 4;
+let timingContainerWidth = 350;
+let timingTargetStart = 0;
+let timingTargetEnd = 0;
 
 function startTimingGame() {
     timingHits = 0;
@@ -1125,17 +1128,30 @@ function startTimingGame() {
 
     gameArea.innerHTML = `
         <p style="color:#666;margin-bottom:10px;">Acertos: <span id="timingHits">0</span>/${timingRequiredHits} (Tentativas: <span id="timingAttempts">0</span>/${timingMaxAttempts})</p>
-        <div class="timing-bar-container">
-            <div class="timing-target"></div>
+        <div class="timing-bar-container" id="timingContainer">
+            <div class="timing-target" id="timingTarget"></div>
             <div class="timing-marker" id="timingMarker"></div>
         </div>
         <button class="btn-timing" onclick="timingStop()">PARAR!</button>
     `;
 
+    // Calcular dinamicamente baseado no tamanho real
+    const container = document.getElementById('timingContainer');
+    const target = document.getElementById('timingTarget');
+    timingContainerWidth = container.offsetWidth;
+
+    // A zona verde está centralizada (left: 50%, transform: translateX(-50%))
+    const targetWidth = target.offsetWidth;
+    timingTargetStart = (timingContainerWidth / 2) - (targetWidth / 2);
+    timingTargetEnd = timingTargetStart + targetWidth;
+
+    const markerWidth = 8;
+    const maxPos = timingContainerWidth - markerWidth;
+
     timingInterval = setInterval(() => {
         timingMarkerPos += timingSpeed * timingDirection;
 
-        if (timingMarkerPos >= 342 || timingMarkerPos <= 0) {
+        if (timingMarkerPos >= maxPos || timingMarkerPos <= 0) {
             timingDirection *= -1;
         }
 
@@ -1150,11 +1166,11 @@ function timingStop() {
     timingAttempts++;
     document.getElementById('timingAttempts').textContent = timingAttempts;
 
-    // Zona verde está de 145 a 205 (60px de largura, centro em 175)
-    const targetStart = 145;
-    const targetEnd = 205;
+    // Verifica se o marcador está dentro da zona verde
+    const markerWidth = 8;
+    const markerCenter = timingMarkerPos + (markerWidth / 2);
 
-    if (timingMarkerPos >= targetStart && timingMarkerPos <= targetEnd) {
+    if (markerCenter >= timingTargetStart && markerCenter <= timingTargetEnd) {
         timingHits++;
         document.getElementById('timingHits').textContent = timingHits;
     }
